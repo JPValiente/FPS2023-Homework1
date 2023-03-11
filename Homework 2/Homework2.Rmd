@@ -1,0 +1,120 @@
+En R, una función es un bloque de código que realiza una tarea específica y puede ser llamada desde otras partes del programa para ejecutar esa tarea. 
+Las funciones son una parte fundamental de cualquier lenguaje de programación pues se utiliza ampliamente para organizar y reutilizar el código.
+
+La estructura básica de una fucnión en R es la siguiente:
+
+```{r}
+square <- function(x) {
+  # Cuerpo de la función
+  # Código que realiza la tarea de la función
+  # Puede incluir variables locales, condicionales, bucles, llamados a otras funciones, etc.
+  
+  result <- x ^ 2
+  
+  
+  return(result) #opcional
+}
+```
+
+Los argumentos de una función son los valores que se pasan a la función para que ésta los procese. 
+
+En R, los argumentos de una función se especifican en la definicion de la funcion a utilizarón de la función y se utilizan para realizar cálculos o para tomar decisiones en el cuerpo de la función.
+
+En R, existen dos tipos de argumentos: 
+
+- Los argumentos por valor son aquellos que se pasan a la función como una copia del objeto original, por lo que cualquier cambio realizado en la función no afectará al objeto original. 
+
+- Los argumentos por referencia, por otro lado, se pasan como una referencia al objeto original, por lo que cualquier cambio realizado en la función afectará al objeto original.
+
+En R, todos los argumentos de una función se consideran por defecto como argumentos por valor. Si no se especifica lo contrario, cualquier cambio realizado en los argumentos dentro de la función no se reflejará en los objetos originales. 
+
+Para especificar un argumento por referencia en R, se utiliza el operador "=" seguido del símbolo "&", como en el siguiente ejemplo:
+
+```{r}
+my_function <- function(x, y, z = NULL, w = NULL, ...){
+  # Código de la función
+}
+```
+
+En este ejemplo, x, y, z y w son argumentos por valor, mientras que "..." puede ser un argumento por referencia, que permite a la función tomar cualquier número de argumentos adicionales.
+
+
+Familia Apply
+
+- Lapply
+
+La función lapply en R es una función de la familia de las funciones apply que se utiliza para aplicar una función dada a cada elemento de una lista, y devuelve una nueva lista con los resultados de aplicar la función a cada elemento de la lista original.
+
+La sintaxis de lapply es la siguiente:
+
+```
+lapply(X, [FUNCION], ...)
+```
+
+Ejemplo de cómo utilizar lapply para aplicar una función a cada elemento de una lista en R:
+
+```{r}
+# Creamos una lista de números
+listOfNumbers <- list(1, 2, 3, 4, 5)
+
+# Utilizamos lapply para aplicar la función square que se definió en el apartado de funciones a cada elemento de listOfNumbers
+result <- lapply(listOfNumbers, square)
+
+#Imprimimos el resultado
+print(result)
+
+# Mostramos los resultados
+```
+- Sapply
+
+Se utiliza para aplicar una función dada a cada elemento de una lista y devuelve un vector o matriz simplificado como resultado. A diferencia de la función lapply, que devuelve una lista como resultado, sapply intenta simplificar el resultado a un vector o matriz.
+
+La sintaxis de sapply es la siguiente:
+
+```
+lapply(X, [FUNCION], ...)
+```
+
+Ejemplo del uso de sapply
+
+```{r}
+
+# Utilizamos sapply para aplicar la función square definida anteriormente a cada elemento de listOfNumbers
+sapplyResult <- sapply(listOfNumbers, square)
+
+# Mostramos los resultados
+print(sapplyResult)
+
+```
+
+- Vapply
+
+La función vapply en R es una función similar a sapply y lapply, pero con la diferencia de que se especifica el tipo de valor que se espera como resultado. 
+
+vapply se utiliza para aplicar una función a cada elemento de una lista y devuelve un vector simplificado, pero a diferencia de sapply, vapply obliga a especificar el tipo de valor que se espera como resultado, lo que hace que la función sea más segura y eficiente.
+
+Utilizando una analogía con otros lenguajes de programación, podemos decir que es "fuertemente tipado".
+
+```{r}
+# Utilizamos vapply para aplicar la función square a cada elemento de la lista de números que hemos estado utilizando para los ejemplos.
+
+vapplyResult <- vapply(listOfNumbers, square, FUN.VALUE = numeric(1))
+
+# Mostramos los resultados
+print(vapplyResult)
+
+#Ahora si tenemos una lista de caracteres como el siguiente
+
+listOfCharacters <- c("a","b","c","d")
+
+#Utilizamos una función sin cuerpo y que retorne el argumento que se le paso
+
+blankFunction <- function(x) {
+  return (x)
+}
+
+#Utilizamos vapply con comprobación numérica (Descomentar para realizar la prueba puesto que al ejecutar la función vapply, dará error)
+
+#vapplyResult <- vapply(listOfCharacters, blankFunction, FUN.VALUE = numeric(1))
+
+```
